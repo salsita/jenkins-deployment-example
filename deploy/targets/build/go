@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# This file can be an arbitrary executable that takes care of building your app.
+
+set -e
+set -x
+
+echo "No build step needed...skipping."
+
+# If your project uses grunt, you will probably call something like:
+# `cd client && grunt build`
+# here
