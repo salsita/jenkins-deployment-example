@@ -12,9 +12,6 @@ mkdir -p ${LOG_ROOT}
 # Start all necessary processes with Supervisord.
 supervisord -c ./targets/run/supervisord.conf -n &
 
-# Run MongoDB in the background.
-mongod --logpath ${LOG_ROOT}/mongo.log --smallfiles -v &
-
 # Run the node server.
 cd ${PROJECT_ROOT}
 
