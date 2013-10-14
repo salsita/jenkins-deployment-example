@@ -1,3 +1,21 @@
+# What's that?
+# ===========
+# This is a Dockerfile - a recipe for building an OS image that Docker
+# containers will be based upon.
+#
+# Docker reads it line-by-line and executes them. The final result
+# is saved as an image and cached so the next run is FAST.
+# Lines prefixed with `RUN` re just plain simple shell commands.
+# The other lines are docker stanzas. See [docs](http://docs.docker.io/en/latest/use/builder/)
+# for the explanation.
+#
+# If you change a line, all the lines below it will be re-executed on
+# next `docker run`.
+
+
+# Contents
+# ========
+
 # What image should the container be based on. If you're OK with Linux Precise
 # 12.04 64 bit with node 0.10.8 and sshd installed, just leave this here.
 FROM realyze/ubuntu-node-sshd
@@ -20,6 +38,10 @@ Run npm install -g phantomjs
 RUN apt-get install -y git
 # Required by PhantomJS.
 RUN apt-get install -y fontconfig
+
+# Install Supervisord.
+RUN apt-get install -y python-setuptools
+RUN easy_install supervisor
 
 # Install Mongodb (see http://docs.docker.io/en/latest/examples/mongodb/).
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -49,5 +71,6 @@ EXPOSE 22
 # into our image.
 # ==============
 
-# Add the project sources to the image.
+# Add the project sources to the image. CWD is the directory where the
+# Dockerfile us stored (in this case it's the project root).
 ADD . /srv/project/

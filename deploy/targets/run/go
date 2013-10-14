@@ -9,17 +9,5 @@ export LOG_ROOT=/data/log
 # Make sure log dir exists.
 mkdir -p ${LOG_ROOT}
 
-# Start all necessary processes with Supervisord.
-supervisord -c ./targets/run/supervisord.conf -n &
-
-# Run MongoDB in the background.
-mongod --logpath ${LOG_ROOT}/mongo.log --smallfiles -v &
-
-# Run the node server.
-cd ${PROJECT_ROOT}
-
-# Please note **this has to be run in foreground** so that Docker's binds
-# to this process.
-npm start \
-    > ${LOG_ROOT}/node.stdout.log \
-    2>${LOG_ROOT}/node.stderr.log
+# Start all processes with Supervisord.
+supervisord -c ./targets/run/supervisord.conf -n

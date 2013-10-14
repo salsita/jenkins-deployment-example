@@ -1,5 +1,8 @@
 .PHONY: deps test
 
+# CWD in your make targets is the directory with the Makefile (i.e., here
+# it's the `deploy/` directory).
+
 deps: TARGET=./targets/deps/go
 deps:
 	@echo ">>> Installing dependencies"; \
