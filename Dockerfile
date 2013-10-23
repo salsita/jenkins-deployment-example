@@ -39,6 +39,8 @@ RUN apt-get install -y git
 # Required by PhantomJS.
 RUN apt-get install -y fontconfig
 
+# Share npm cache (speeds things up).
+RUN npm config set cache /data/.npm --global
 
 # This is where we tell the world what ports should our container make visible
 # from the outside (Docker will map them to random ports or ports we specify
