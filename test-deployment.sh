@@ -20,8 +20,7 @@ fi
 
 rsync -v -r ${1}/* ${PLAYER}@${DOCKER_BOX}:/tmp/${project}/
 
-
-ssh ${PLAYER}@${DOCKER_BOX} <<\EOF
+ssh ${PLAYER}@${DOCKER_BOX} <<EOF
   cd /tmp/${project};
   sudo docker build -t "${project}-test" .
 
