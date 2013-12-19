@@ -9,5 +9,8 @@ export LOG_ROOT=/data/log
 # Make sure log dir exists.
 mkdir -p ${LOG_ROOT}
 
+# Stop the SSH server (we want to use OpenSSH started by supervisor).
+/etc/init.d/ssh stop
+
 # Start all processes with Supervisord.
 supervisord -c ./targets/run/supervisord.conf -n
