@@ -5,9 +5,13 @@ set -x
 
 export PROJECT_ROOT=/srv/project
 export LOG_ROOT=/data/log
+export DB_ROOT=/data/db
 
 # Make sure log dir exists.
 mkdir -p ${LOG_ROOT}
+
+# Make sure db dir exists.
+mkdir -p ${DB_ROOT}
 
 # Stop the SSH server (we want to use OpenSSH started by supervisor).
 /etc/init.d/ssh stop
