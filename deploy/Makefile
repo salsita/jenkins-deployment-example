@@ -1,16 +1,10 @@
-.PHONY: deps test
+.PHONY: test
 
 # CWD in your make targets is the directory with the Makefile (i.e., here
 # it's the `deploy/` directory).
 
-deps: TARGET=./targets/deps/go
-deps:
-	@echo ">>> Installing dependencies"; \
-	if [ -x "${TARGET}" ]; then "${TARGET}"; fi
-
-
 build: TARGET=./targets/build/go
-build: deps
+build:
 	@echo ">>> Building the app"; \
 	if [ -x "${TARGET}" ]; then "${TARGET}"; fi
 
