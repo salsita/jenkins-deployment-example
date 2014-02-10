@@ -14,13 +14,5 @@ Project dependency files example:
   - `package.json`
   - `.bowerrc`
   - `bower.json`
-  
+
 If you need another file, you must also add its path to `.docker-cache` file in root directory, so the caching feature works correctly.
-  
-Add command example:
-
-  - `ADD code/server/package.json /srv/project/code/server/package.json`
-  
-Install command example:
-
-  - `RUN (cd /srv/project/code/server && npm install)`
