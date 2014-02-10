@@ -42,6 +42,30 @@ RUN apt-get install -y fontconfig
 # Share npm cache (speeds things up).
 RUN npm config set cache /data/.npm --global
 
+
+# This is where we tell Docker to copy something from the host filesysytem
+# into our image.
+# CWD is the directory where the Dockerfile us stored (in this case it's the
+# project root).
+# Also here we can install dependencies, which are dependent on some files
+# from project sources, like package.json.
+# ==============
+
+# Add project dependency definition files to the image.
+ADD code/server/package.json /srv/project/code/server/package.json
+ADD code/client/package.json /srv/project/code/client/package.json
+ADD code/client/.bowerrc /srv/project/code/client/.bowerrc
+ADD code/client/bower.json /srv/project/code/client/bower.json
+
+# Install project dependencies.
+RUN (cd /srv/project/code/server && npm install)
+RUN (cd /srv/project/code/client && npm install)
+RUN (cd /srv/project/code/client && bower install --allow-root)
+
+# Add the remaining project sources to the image.
+ADD . /srv/project/
+
+
 # This is where we tell the world what ports should our container make visible
 # from the outside (Docker will map them to random ports or ports we specify
 # when we run the container).
@@ -52,12 +76,3 @@ EXPOSE 3000
 
 # Expose SSHD port.
 EXPOSE 22
-
-
-# This is where we tell Docker to copy something from the host filesysytem
-# into our image.
-# ==============
-
-# Add the project sources to the image. CWD is the directory where the
-# Dockerfile us stored (in this case it's the project root).
-ADD . /srv/project/
